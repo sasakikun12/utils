@@ -1,0 +1,13 @@
+host_pg = 'localhost'
+db_pg = 'database'
+user_pg = 'user'
+password_pg = 'password'
+oracle_connection ='User/PasswordHost:Port/Database'
+host_mysql = 'localhost'
+db_mysql = 'database'
+user_mysql = 'user'
+password_mysql = 'password'
+host_sqlserver="localhost"
+db_sqlserver="database"
+user_sqlserver="user"
+password_sqlserver="password"

@@ -1,0 +1,9 @@
+"C:\Program Files\OpenSSL-Win64\bin\openssl.exe" pkcs12 -in cert.pfx -nocerts -out key.pem
+
+"C:\Program Files\OpenSSL-Win64\bin\openssl.exe" pkcs12 -in cert.pfx -clcerts -nokeys -out cert.pem
+
+"C:\Program Files\OpenSSL-Win64\bin\openssl.exe" rsa -in key.pem -out server.key
+
+"C:\Program Files\OpenSSL-Win64\bin\openssl.exe" pkcs12 -in cert.pfx -out file.nokey.pem -nokeys
+
+"C:\Program Files\OpenSSL-Win64\bin\openssl.exe" pkcs12 -in "cert.pfx" -nodes -legacy -provider-path "C:Program Files\OpenSSL-Win64\bin"

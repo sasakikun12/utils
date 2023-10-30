@@ -1,0 +1,1 @@
+Para rodar com SSL, necessita dos arquivos 'cert.pem', 'server.key'

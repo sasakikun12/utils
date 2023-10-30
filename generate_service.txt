@@ -1,0 +1,51 @@
+call nssm.exe install my_flask_app "%cd%\run_server.bat"
+call nssm.exe set my_flask_app AppStdout "%cd%\logs\my_flask_app_logs.log"
+call nssm.exe set my_flask_app AppStderr "%cd%\logs\my_flask_app_logs.log"
+call nssm set my_flask_app AppRotateFiles 1
+call nssm set my_flask_app AppRotateOnline 1
+call nssm set my_flask_app AppRotateSeconds 86400
+call nssm set my_flask_app AppRotateBytes 1048576
+call sc start my_flask_app
+
+// Entrar na pasta que contenha o arquivo .bat através do cmd (usando o adm)
+
+call nssm.exe install api_metas "%cd%\metas.bat"
+call nssm.exe set api_metas AppStdout "%cd%\logs\metas_logs.log"
+call nssm.exe set api_metas AppStderr "%cd%\logs\metas_logs.log"
+call nssm set api_metas AppRotateFiles 1
+call nssm set api_metas AppRotateOnline 1
+call nssm set api_metas AppRotateSeconds 86400
+call nssm set api_metas AppRotateBytes 1048576
+call sc start api_metas
+
+call nssm.exe install api_depara "%cd%\depara.bat"
+call nssm.exe set api_depara AppStdout "%cd%\logs\depara_logs.log"
+call nssm.exe set api_depara AppStderr "%cd%\logs\depara_logs.log"
+call nssm set api_depara AppRotateFiles 1
+call nssm set api_depara AppRotateOnline 1
+call nssm set api_depara AppRotateSeconds 86400
+call nssm set api_depara AppRotateBytes 1048576
+call sc start api_depara
+
+call nssm.exe install api_depara_FM "%cd%\depara.bat"
+call nssm.exe set api_depara_FM AppStdout "%cd%\logs\depara_logs.log"
+call nssm.exe set api_depara_FM AppStderr "%cd%\logs\depara_logs.log"
+call nssm set api_depara_FM AppRotateFiles 1
+call nssm set api_depara_FM AppRotateOnline 1
+call nssm set api_depara_FM AppRotateSeconds 86400
+call nssm set api_depara_FM AppRotateBytes 1048576
+call sc start api_depara_FM
+
+call nssm.exe install asrun "%cd%\asrun.bat"
+call nssm.exe set asrun AppStdout "%cd%\logs\asrun_logs.log"
+call nssm.exe set asrun AppStderr "%cd%\logs\asrun_logs.log"
+call nssm set asrun AppRotateFiles 1
+call nssm set asrun AppRotateOnline 1
+call nssm set asrun AppRotateSeconds 86400
+call nssm set asrun AppRotateBytes 1048576
+call sc start asrun
+
+sc queryex servicename
+taskkill /f /pid PID
+sc delete asRun
+sc create asRun binPath= "C:\Program Files\Python311\python.exe --C:\Users\julio.tic\Desktop\ASRUN\scheduler.py"

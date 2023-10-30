@@ -1,0 +1,45 @@
+How to generate ssl
+------------------------------------------------------------------------------------------------
+Generate .pfx file with certification
+------------------------------------------------------------------------------------------------
+RDP to your server
+
+On the Start menu, click RUN and then type MMC. Hit enter.
+
+In MMC, click FILE > ADD/REMOVE Snap-in.
+
+Click CERTIFICATES > Add.
+
+Select the COMPUTER ACCOUNT and then click Next. Select Local Computer and then click Finish. Then close the add standalone snap-in window and the add/remove snap-in window.
+
+Click the + sign to expand the certificates (local computer) console tree and look for the personal directory/folder. Expand the certificates folder.
+
+Right-click on the certificate you want to export and select ALL TASKS > Export
+
+Choose YES, EXPORT THE PRIVATE KEY and include all certificates in the certificate path if possible. WARNING: Do not select the delete private key option.
+
+Leave the default settings and then enter your password, if desired.
+
+Choose to save the file and then click FINISH. You should receive an “export successful” message. The .pfx file is now saved to the location you selected.
+
+Move this file to your desktop for the next step, unless you’re okay with installing openssl on your server (does not require a reboot).
+
+
+
+------------------------------------------------------------------------------------------------
+Generate pem file(s)
+------------------------------------------------------------------------------------------------
+
+Conversion to a combined PEM file
+To convert a PFX file to a PEM file that contains both the certificate and private key, the following command needs to be used:
+# openssl pkcs12 -in filename.pfx -out cert.pem -nodes
+
+Conversion to separate PEM files
+We can extract the private key form a PFX to a PEM file with this command:
+# openssl pkcs12 -in filename.pfx -nocerts -out key.pem
+
+Exporting the certificate only:
+# openssl pkcs12 -in filename.pfx -clcerts -nokeys -out cert.pem
+
+Removing the password from the extracted private key:
+# openssl rsa -in key.pem -out server.key
